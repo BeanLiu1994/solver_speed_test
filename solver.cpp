@@ -296,7 +296,7 @@ int main()
 	Eigen::SparseMatrix<double> A = LoadSP("spA");
 	Eigen::VectorXd b = LoadVec("b");
 
-	std::cout << A.rows() << " and " << A.cols() << std::endl;
+	std::cout << A.rows() << " and " << A.cols() << "and non-zero " << A.nonZeros() << std::endl;
 	std::cout << b.rows() << std::endl;
 
 	// for some methods' initialization
