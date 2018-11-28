@@ -12,6 +12,7 @@ A 为对称的稀疏矩阵， b为列向量。
 问题中的A为一个Laplacian矩阵，大小 93864 x 93864 含有2133774个非零元素。 仅有0.02%的元素为非零的。
 
 **测试方法**
+
 方法|介绍
 -|-
 PardisoLDLT|Eigen到intel mkl的一个[PARDISO library 接口](http://eigen.tuxfamily.org/dox/classEigen_1_1PardisoLDLT.html)。
