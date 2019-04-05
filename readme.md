@@ -4,6 +4,13 @@
 
 求解 Ax = b 的耗时。
 
+**需要的第三方库**
+
+* Suitesparse
+* Intel MKL
+* Eigen3
+* CUDA
+
 **测试数据**
 
 A 为对称的稀疏矩阵， b为列向量。
@@ -14,6 +21,8 @@ A 为对称的稀疏矩阵， b为列向量。
 A中元素分布:
 ![spy_img](spy_result.png)
 
+这里只提供了一份数据。如果换用不同的Ab矩阵，结果可能会有较大变化。
+
 **测试方法**
 
 方法|介绍
@@ -23,7 +32,9 @@ SimplicialLDLT|Eigen自己实现的一个[LDLT分解](http://eigen.tuxfamily.org
 UmfPackLU|Eigen到UmfPack的[LU分解接口](http://eigen.tuxfamily.org/dox/classEigen_1_1UmfPackLU.html)
 CholmodSupernodalLLT|Eigen到SuiteSparse中[cholmod的接口](http://eigen.tuxfamily.org/dox/classEigen_1_1CholmodSupernodalLLT.html)
 ConjugateGradient|Eigen自带的[共轭梯度](http://eigen.tuxfamily.org/dox/classEigen_1_1ConjugateGradient.html)迭代方法
-cusolverSpDcsrlsvchol|cusolver中的接口, 用法详见cuda samples
+cusolverSpDcsrlsvchol|cusolver中的接口, 用法详见cuda提供的samples
+
+注意事项： 我可能不太清楚这些方法主要针对的是什么问题，所以依旧有可能在使用方法上还未达到最优的结果，但基本上文档提到的使用方法我都遵守了。
 
 **测试效果**
 
@@ -54,6 +65,8 @@ size|CholmodSupernodalLLT|PardisoLDLT|SimplicialLDLT|UmfPackLU|cusolverSpDcsrlsv
 单位：秒
 
 **要注意的是结果可能与稀疏程度情况有关**，这个测试结果不能代表所有情况，如果需要对新的问题进行测试，可以替换文件spA和b为对应的矩阵内容。
+
+**cholmod与eigen的关系** eigen使用了cholmod的分解，但当时eigen使用的是cpu版本。而印象中eigen并没有提供cholmod的gpu版接口，不知道gpu版本会使效果如何变化。有兴趣后续可以尝试一下。
 
 **矩阵数据格式**
 
